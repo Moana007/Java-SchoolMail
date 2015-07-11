@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+ <display-name>Liste de mails</display-name>     
+ <description>Ceci est une liste de mails</description> 
+<servlet>
+	<servlet-name>Connect</servlet-name>
+	<servlet-class>Authentification.Connect</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Connect</servlet-name>
+	<url-pattern>/Connect</url-pattern>
+</servlet-mapping>
+<security-constraint>      
+	<web-resource-collection>         
+		<web-resource-name>jsp</web-resource-name>
+		<url-pattern>/WebContent/jsp/*</url-pattern>
+		<http-method>POST</http-method>
+	</web-resource-collection>
+</security-constraint>  
+</web-app>
