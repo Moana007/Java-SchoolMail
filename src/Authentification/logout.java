@@ -1,8 +1,6 @@
 package Authentification;
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Accueil
+ * Servlet implementation class logout
  */
-@WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+@WebServlet("/logout")
+public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Accueil() {
+    public logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,38 +36,15 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		if(request.getParameter("login").equals("root"))
-		{
+		if(request.getParameter("logout") !=  null){
 			HttpSession session=request.getSession();
-			if(request.getParameter("logout")==null)
-			{
-				session.setAttribute("login",request.getParameter("login"));
-			}
-			else
-			{
-				session.invalidate();
-			}
+			session.invalidate();
 			
-			PrintWriter out=response.getWriter();
-			out.println("Session créée !");
-			out.println("Login: "+session.getAttribute("login"));
-			
-			out.println("<form method='post' action='Connect'>");
-			out.println("<input type='submit' name='logout' value='logout'/>");
-			out.println("<input type='hidden' name='msgExit' value='Vous avez été déconnecté !'/>");
-			out.println("</form>");
+			RequestDispatcher dispat = request.getRequestDispatcher("/connect");
+			request.setAttribute("state", "deco");
+			dispat.forward(request,response);
 		}
-		
-		else
-		{
-			PrintWriter out=response.getWriter();
-			out.println("<form method='post' action='Connect'>");
-			out.println("<input type='submit' name='logout' value='Accueil'/>");
-			out.println("</form>");
-		}
-		
 	}
 
 }

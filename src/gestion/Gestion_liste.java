@@ -1,29 +1,32 @@
-package Authentification;
+package gestion;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import contact.Contact;
 import connectBDD.BDD;
-/**
- * Servlet implementation class connect
- */
-@WebServlet("/connect")
-public class connect extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import listContact.ListContact;
 
+/**
+ * Servlet implementation class Gestion_liste
+ */
+@WebServlet("/Gestion_liste")
+public class Gestion_liste extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
     /**
-     * Default constructor. 
-     * @throws SQLException 
+     * @see HttpServlet#HttpServlet()
      */
-    public connect() throws SQLException {
+    public Gestion_liste() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,21 +34,28 @@ public class connect extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getAttribute("state") != null){
-			String state = (String) request.getAttribute("state");
-			request.setAttribute("state",state);
-		}
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		getServletContext().getRequestDispatcher("/jsp/connect.jsp").include(request,response);
-	}	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		BDD bdd=new BDD();
+		bdd.connect();
+	    ResultSet rs=bdd.executeSelect("SELECT nom FROM lists");
+	    
+	    ArrayList<ListContact> l= ListContact.ajoutList(rs);
+	    
+	    
+	    request.setAttribute("liste",l);
+	    
+		
+		RequestDispatcher dispatConn = request.getRequestDispatcher("/jsp/gestion_list.jsp");
+		dispatConn.forward(request,response);
 	}
+
 }

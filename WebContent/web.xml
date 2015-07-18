@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
- <display-name>Liste de mails</display-name>     
- <description>Ceci est une liste de mails</description> 
-<servlet>
-	<servlet-name>Connect</servlet-name>
-	<servlet-class>Authentification.Connect</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>Connect</servlet-name>
-	<url-pattern>/Connect</url-pattern>
-</servlet-mapping>
-<security-constraint>      
-	<web-resource-collection>         
+	<display-name>Appli SchoolMail </display-name>
+	<description>Ceci est une application SchoolMail</description>
+	<servlet>
+		<servlet-name>connect</servlet-name>
+		<servlet-class>Authentification.connect</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>connect</servlet-name>
+		<url-pattern>/connect</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>home</servlet-name>
+		<servlet-class>Authentification.home</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>home</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>logout</servlet-name>
+		<servlet-class>Authentification.logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>BDD</servlet-name>
+		<servlet-class>connectBDD.BDD</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BDD</servlet-name>
+		<url-pattern>/BDD</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Gestion_liste</servlet-name>
+		<servlet-class>gestion.Gestion_liste</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Gestion_liste</servlet-name>
+		<url-pattern>/Gestion_liste</url-pattern>
+	</servlet-mapping>
+	<security-constraint> <web-resource-collection>
 		<web-resource-name>jsp</web-resource-name>
-		<url-pattern>/WebContent/jsp/*</url-pattern>
-		<http-method>POST</http-method>
-	</web-resource-collection>
-</security-constraint>  
+			<url-pattern>/WebContent/jsp/*</url-pattern>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+	</security-constraint>
 </web-app>
